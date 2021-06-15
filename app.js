@@ -123,16 +123,31 @@
                 this.cart.forEach( game => {
 
                     let div = document.createElement('div');
+
                     let $button = document.createElement('button');
+                    $button.setAttribute("data-js", 'deleteGame');
+                    $button.appendChild(document.createTextNode('Delete'));
                     
                     div.setAttribute("data-js", "game");
+                        div.id = this.cart.indexOf(game);
+                        div.appendChild(document.createTextNode(`${game}`));
                     
-                    div.appendChild(document.createTextNode(`${game}`));
-                    
+                    $button.value = div.id
                     div.appendChild($button);
-                    Cart.appendChild(div); 
+                    Cart.appendChild(div);
                 })
 
+                let $delete = $('[data-js="deleteGame"]');
+                let deleteValue = $delete.get().value;
+                $delete.on('click', () => {this.HandleDelete(deleteValue)});
+
+            },
+
+            HandleDelete: function(id) {
+                let child = document.getElementById(id);
+                document.querySelector('[data-js="cart"]').removeChild(child);
+                this.cart.splice(id, 1);
+                console.log(this.cart);
             }
         }
 
