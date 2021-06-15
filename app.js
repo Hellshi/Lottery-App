@@ -7,6 +7,8 @@
             
             init: function(){
                 this.ajaxRequest();
+                this.cleaGame();
+                this.addCart();
             },
 
             ajaxRequest: function() {
@@ -32,9 +34,17 @@
 
             selectGame: function(data) {
 
-                $('[data-js="lotofacil"]').on('click', () => {this.handleSelectGame(data.types[0])});
-                $('[data-js="megasena"]').on('click',  () => {this.handleSelectGame(data.types[1])});
-                $('[data-js="quina"]').on('click',  () => {this.handleSelectGame(data.types[2])});
+                $('[data-js="lotofacil"]').on('click', () => {
+                    this.handleSelectGame(data.types[0])
+                });
+
+                $('[data-js="megasena"]').on('click',  () => {
+                    this.handleSelectGame(data.types[1])
+                });
+
+                $('[data-js="quina"]').on('click',  () => {
+                    this.handleSelectGame(data.types[2])
+                });
 
             },
 
@@ -44,7 +54,7 @@
                 $('[data-js="gameRules"]').get().textContent = rules.description;
                 
                 this.generatebuttons(rules.range);
-
+                this.generateGame(rules.maxNumber);
             },
 
             generatebuttons: function(GameRange) {
@@ -56,13 +66,74 @@
 
                 for(let i = 1; i <= GameRange; i++) {
                     const $button = document.createElement('button');
-                    $button.value = 1;
+                    $button.value = i;
                     $button.setAttribute("data-js", 'number-choice')
                     $button.appendChild(document.createTextNode(`${i}`));
                     div.appendChild($button);
                 }
 
             },
+
+            currentGame: [],
+
+            generateGame: function(gameRule) {
+                $('[data-js="number-choice"]').forEach(button => {
+                    button.addEventListener('click', () => {
+                        this.addNumberToArray(gameRule, button.value)
+                    })
+                })
+            },
+
+            addNumberToArray: function(gameRule, selectedNumber) {
+                if(this.currentGame.length < gameRule){
+
+                    if(this.currentGame.indexOf(selectedNumber) === -1){
+
+                        this.currentGame.push(selectedNumber);
+                        console.log(this.currentGame);
+
+                    }
+                }
+            },
+
+            cleaGame: function() {
+                $('[data-js="clear"]').on('click', () => {
+                    this.currentGame = [];
+                    console.log(this.currentGame);
+                })
+            },
+
+            cart: [],
+            
+            addCart: function() {
+                $('[data-js="addToCart"]').on( 'click', () => {
+                    this.cart.push([this.currentGame]);
+                    this.currentGame = [];
+                    this.cartDisplay();
+                })
+            },
+
+            cartDisplay: function() {
+
+                let Cart = $('[data-js="cart"]').get();
+
+               if(Cart.hasChildNodes() === true)
+                    Cart.innerHTML = '';
+
+                this.cart.forEach( game => {
+
+                    let div = document.createElement('div');
+                    let $button = document.createElement('button');
+                    
+                    div.setAttribute("data-js", "game");
+                    
+                    div.appendChild(document.createTextNode(`${game}`));
+                    
+                    div.appendChild($button);
+                    Cart.appendChild(div); 
+                })
+
+            }
         }
 
     }());
