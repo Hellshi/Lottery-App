@@ -56,6 +56,8 @@
                 this.generatebuttons(rules.range);
                 this.generateGame(rules.maxNumber);
                 this.completeGame(rules.range, rules.maxNumber);
+
+                console.log(this.rules);
             },
 
             generatebuttons: function(GameRange) {
@@ -129,15 +131,52 @@
                     $button.setAttribute("data-js", 'deleteGame');
                     $button.appendChild(document.createTextNode('Delete'));
                     
+                    
                     div.setAttribute("data-js", "game");
                         div.id = this.cart.indexOf(game);
                         div.appendChild(document.createTextNode(`${game}`));
+
+/*                     let priceAndType = this.getNameAndPrice(game[0]);
+                    console.log(priceAndType.$price) */
                     
-                    $button.value = div.id
-                    $button.addEventListener('click', () => {this.HandleDelete($button.value)})
+                    $button.value = div.id;
+                    $button.addEventListener('click', () => {
+                        this.HandleDelete($button.value)
+                    });
+
                     div.appendChild($button);
                     Cart.appendChild(div);
                 })
+
+            },
+
+            getNameAndPrice: function(game) {
+
+                console.log(game.length)
+                let $type = document.createElement('span');
+                let $price = document.createElement('span');
+                let type
+                let price
+
+                if(game.length == 5) {
+                    type = 'quina';
+                    price = '2'
+                }
+
+                if(game.length == 15) {
+                    type = 'LotoFácil';
+                    price = '55'
+                }
+
+                if(game.length == 6) {
+                    type = 'Mega-sena';
+                    price = '2'
+                }
+
+                $type.appendChild(document.createTextNode(`${type}`));
+                $price.appendChild(document.createTextNode(`${price}`));
+
+                return { $type, $price }
 
             },
 
