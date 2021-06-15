@@ -52,7 +52,7 @@
 
                 $('[data-js="game"]').get().textContent = rules.type;
                 $('[data-js="gameRules"]').get().textContent = rules.description;
-                
+                            
                 this.generatebuttons(rules.range);
                 this.generateGame(rules.maxNumber);
             },
@@ -133,13 +133,10 @@
                         div.appendChild(document.createTextNode(`${game}`));
                     
                     $button.value = div.id
+                    $button.addEventListener('click', () => {this.HandleDelete($button.value)})
                     div.appendChild($button);
                     Cart.appendChild(div);
                 })
-
-                let $delete = $('[data-js="deleteGame"]');
-                let deleteValue = $delete.get().value;
-                $delete.on('click', () => {this.HandleDelete(deleteValue)});
 
             },
 
@@ -148,7 +145,7 @@
                 document.querySelector('[data-js="cart"]').removeChild(child);
                 this.cart.splice(id, 1);
                 console.log(this.cart);
-            }
+            },
         }
 
     }());
