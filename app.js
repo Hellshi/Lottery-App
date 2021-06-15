@@ -55,6 +55,7 @@
                             
                 this.generatebuttons(rules.range);
                 this.generateGame(rules.maxNumber);
+                this.completeGame(rules.range, rules.maxNumber);
             },
 
             generatebuttons: function(GameRange) {
@@ -146,6 +147,19 @@
                 this.cart.splice(id, 1);
                 console.log(this.cart);
             },
+
+            completeGame: function(range, maxNumber) {
+                $('[data-js="completeGame"]').on('click', () => {
+                    this.generateCompleteGame(range, maxNumber)
+                });
+            },
+
+            generateCompleteGame: function(range, maxNumber) {
+                for(let i = 0; i <= maxNumber; i++) {
+                    let selected = Math.floor(Math.random() * range);
+                    this.addNumberToArray(maxNumber, selected)
+                }
+            }
         }
 
     }());
