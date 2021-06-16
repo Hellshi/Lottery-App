@@ -162,7 +162,7 @@
                     
                     $button.value = div.id;
                     $button.addEventListener('click', () => {
-                        this.HandleDelete($button.value)
+                        this.HandleDelete($button.value, Price)
                     });
 
                     div.appendChild($button);
@@ -172,15 +172,22 @@
             },
 
             getPrice: function(price) {
-
+                console.log(price.length)
+                if(price.length === 0) {
+                    let total = 0;
+                    $('[data-js="price"]').get().textContent = total
+                } else {
                 const total = price.reduce((total, currentElement) => total + currentElement);
                 $('[data-js="price"]').get().textContent = total
+            }
             },
 
-            HandleDelete: function(id) {
+            HandleDelete: function(id, price) {
                 let child = document.getElementById(id);
                 document.querySelector('[data-js="cart"]').removeChild(child);
                 this.cart.splice(id, 1);
+                price.splice(id, 1);
+                this.getPrice(price);
                 console.log(this.cart);
             },
 
