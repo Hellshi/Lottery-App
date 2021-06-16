@@ -5,29 +5,92 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TGLA</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-    <h2>Escolha seu jogo</h2> <span data-js="game"></span><br>
+    <div class="container">
 
-    
-        <button data-js="lotofacil">Lotofácil</button>
-        <button data-js="megasena" >Mega-sena</button>
-        <button data-js="quina" >Quina</button><br>
-    
+        <div class="leftContainer">
+            <div class="title">
+                <h2>New bet for <span data-js="game">Choose your bet!</span> </h2>
+            </div>
 
-    <span data-js="gameRules"></span><br>
+            <div class="rules">
 
-    <div data-js="numbers"></div>
+                <h4>Choose a game</h4>
 
-    <button data-js="completeGame">Complete Game</button>
-    <button data-js="addToCart">Add to cart</button>
-    <button data-js="clear">Clear Game</button>
+                    <button class="chooseGame" data-js="lotofacil">Lotofácil</button>
+                    <button class="chooseGame" data-js="megasena" >Mega-sena</button>
+                    <button class="chooseGame" data-js="quina" >Quina</button><br>
+                
 
-    <h2>Cart</h2>
-    <div data-js="cart"></div>
-    <h2>Preço</h2>
-    <div data-js="price"></div>
+                <h4>Fill your bet!</h4>
+                <span data-js="gameRules">
+                    Select one of the buttons ahead to see the correspondent bet rules
+                </span><br>
+
+            </div>
+
+            <div class="numbers">
+                <div data-js="numbers">
+
+                <div class="line">
+                    <button data-js="number-choice">1</button>
+                    <button data-js="number-choice">2</button>
+                    <button data-js="number-choice">3</button>
+                    <button data-js="number-choice">1</button>
+                    <button data-js="number-choice">2</button>
+                    <button data-js="number-choice">3</button>
+                    <button data-js="number-choice">1</button>
+                    <button data-js="number-choice">2</button>
+                    <button data-js="number-choice">3</button>
+                </div>
+
+                <div class="line">
+                    <button data-js="number-choice">1</button>
+                    <button data-js="number-choice">2</button>
+                    <button data-js="number-choice">3</button>
+                    <button data-js="number-choice">1</button>
+                    <button data-js="number-choice">2</button>
+                    <button data-js="number-choice">3</button>
+                    <button data-js="number-choice">1</button>
+                    <button data-js="number-choice">2</button>
+                    <button data-js="number-choice">3</button>
+                </div>
+
+                <div class="line">
+                    <button data-js="number-choice">1</button>
+                    <button data-js="number-choice">2</button>
+                    <button data-js="number-choice">3</button>
+                    <button data-js="number-choice">1</button>
+                    <button data-js="number-choice">2</button>
+                    <button data-js="number-choice">3</button>
+                    <button data-js="number-choice">1</button>
+                    <button data-js="number-choice">2</button>
+                    <button data-js="number-choice">3</button>
+                </div>
+
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="gameSelectors" data-js="completeGame">Complete Game</button>
+                <button class="gameSelectors" data-js="clear">Clear Game</button>
+                <button class="gameSelectors" id="add" data-js="addToCart"> <i class="fa fa-shopping-cart"></i> Add to cart </button>
+            </div>
+        </div>
+
+        <div class="rightContainer">
+                <div class="cart">
+                    <h2>CART</h2>
+                    <div data-js="cart"></div>
+                    <h2>CART <span data-js="price"></span></h2>
+            </div>
+        </div>
+
+    </div>
 
 </body>
 <script src="./DOM.js"></script>

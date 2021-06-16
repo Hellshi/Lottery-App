@@ -1,0 +1,220 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F7F7F7;
+    color: #707070;
+}
+
+
+/* -------------------------- Containers ------------------------------ */
+
+
+.container {
+    margin-top: 30px;
+    height: 550px;
+    width: 1100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* container com o jogo */
+.leftContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 770px;
+    position: relative;
+    top: 15px;
+    left: -50px;
+}
+/* container com o carrinho */
+.rightContainer {
+    border: 1px solid #E2E2E2;
+    border-radius: 20px;
+    word-wrap: break-word;
+    display: flex;
+    max-width: 280px;
+    flex-direction: column;
+    position: relative;
+    top: -60px;
+    width: 280px;
+    height: 344px;
+    background-color: white;
+    padding: 20px;
+}
+
+/* container com todos os números */
+
+.numbers {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    padding-bottom: 10px;
+    max-height: 220px;
+    min-height: 220px;
+    min-width: 650px;
+    max-width: 650px;
+}
+
+/*Container com as regras e os botões para escolha de jogo*/
+
+.rules{
+    width: 680px;
+}
+
+
+/* -------------------------- End-of-Containers ------------------------------ */
+
+
+
+/* -------------------------- texts ------------------------------ */
+
+h4 {
+    color: #707070;
+    padding-bottom: 20px; 
+}
+/* Cart title */
+h2 {
+    margin-bottom: 15px;
+}
+
+/* Cart-itens */
+[data-js="cart"] {
+    padding-bottom: 10px;
+}
+
+[data-js="gameRules"] {
+    color: #707070;
+}
+
+.title {
+    color: #707070;
+    text-transform:uppercase;
+    font-size: 15px;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+[data-js="game"] {
+    font-weight: lighter;
+}
+
+/* -------------------------- end-of-texts ------------------------------ */
+
+
+
+
+/* -------------------------- Buttons ------------------------------ */
+
+/* Mega-sena Lotomania e Lotofácil */
+.chooseGame {
+    border-style: solid;
+    border-radius: 20px;
+    padding: 7px;
+    background-color: white;
+    font-size: 15px;
+    font-weight: bold;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+[data-js="lotofacil"] {
+    color: #7F3992;
+    border-color: #7F3992;
+}
+
+[data-js="megasena"] {
+    color: #01AC66;
+    border-color: #01AC66;
+}
+
+[data-js="quina"] {
+    color: #F79C31;
+    border-color: #F79C31;
+}
+
+
+/* Clear Game, Add to Cart and Complete Game */
+.gameSelectors {
+    border: 2px solid #27C383;
+    border-radius: 10px;
+    margin-left: 10px;
+    padding: 10px;
+    background-color: transparent;
+    color: #27C383;
+
+}
+
+[data-js="addToCart"] {
+    background-color: #27C383;
+    color: white;
+    margin-left: 150px;
+}
+
+/* Números selecionados */
+[data-js="number-choice"] {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    width: 35px;
+    height: 35px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 30px;
+    color: white;
+    background-color: #ADC0C4;
+}
+
+/* -------------------------- end-of-buttons ------------------------------ */
+
+
+
+/* -------------------------- buttons-hover ------------------------------ */
+
+.gameSelectors:hover {
+    background-color: #27C383;
+    color: white;
+    cursor: pointer;
+}
+
+[data-js="addToCart"]:hover {
+    background: white;
+    border-color: #01AC66;
+    color: #01AC66;
+}
+
+[data-js="number-choice"]:hover {
+    background: #4d88ff;
+}
+
+
+[data-js="lotofacil"]:hover {
+    color: white;
+    background-color: #7F3992;
+    cursor: pointer;
+}
+
+[data-js="megasena"]:hover {
+    color: white;
+    background-color: #01AC66;
+    cursor: pointer;
+}
+
+[data-js="quina"]:hover {
+    color: white;
+    background-color: #F79C31;
+    cursor: pointer;
+}
+
+/* -------------------------- end-of-buttons-hover ------------------------------ */

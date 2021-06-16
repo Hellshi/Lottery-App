@@ -175,10 +175,10 @@
                 console.log(price.length)
                 if(price.length === 0) {
                     let total = 0;
-                    $('[data-js="price"]').get().textContent = total
+                    $('[data-js="price"]').get().textContent = `TOTAL ${total}`
                 } else {
                 const total = price.reduce((total, currentElement) => total + currentElement);
-                $('[data-js="price"]').get().textContent = total
+                $('[data-js="price"]').get().textContent = `TOTAL ${total}`
             }
             },
 
