@@ -35,15 +35,15 @@
             selectGame: function(data) {
 
                 $('[data-js="lotofacil"]').on('click', () => {
-                    this.handleSelectGame(data.types[0])
+                    this.handleSelectGame(data.types[0]);
                 });
 
                 $('[data-js="megasena"]').on('click',  () => {
-                    this.handleSelectGame(data.types[1])
+                    this.handleSelectGame(data.types[1]);
                 });
 
                 $('[data-js="quina"]').on('click',  () => {
-                    this.handleSelectGame(data.types[2])
+                    this.handleSelectGame(data.types[2]);
                 });
 
             },
@@ -52,13 +52,30 @@
 
                 $('[data-js="game"]').get().textContent = rules.type;
                 $('[data-js="gameRules"]').get().textContent = rules.description;
-                            
-                this.generatebuttons(rules.range);
-                this.generateGame(rules.maxNumber);
-                this.completeGame(rules.range, rules.maxNumber);
 
-                console.log(this.rules);
+                this.completeGame(rules.range, rules.maxNumber, rules.type, rules.price);
+                this.generatebuttons(rules.range, rules.maxNumber, rules.type, rules.price);
+                this.generateGame(rules.maxNumber, rules.type, rules.price);
+
             },
+
+            completeGame: function(range, maxNumber, type, price) {
+                $('[data-js="completeGame"]').on('click', () => {
+                    this.generateCompleteGame(range, maxNumber, type, price)
+                });
+                console.log(type, price)
+                
+            }, 
+
+            generateCompleteGame: function(range, maxNumber, gameType, gamePrice) {
+
+                console.log(gameType)
+                for(let i = 0; i <= maxNumber; i++) {
+                    let selected = Math.floor(Math.random() * range);
+
+                    this.addNumberToArray(maxNumber, selected, gameType, gamePrice);
+                }
+            }, 
 
             generatebuttons: function(GameRange) {
 
@@ -79,30 +96,34 @@
 
             currentGame: [],
 
-            generateGame: function(gameRule) {
+            generateGame: function(gameRule, gameType, gamePrice) {
                 $('[data-js="number-choice"]').forEach(button => {
                     button.addEventListener('click', () => {
-                        this.addNumberToArray(gameRule, button.value)
+                        this.addNumberToArray(gameRule, button.value, gameType, gamePrice);
                     })
                 })
             },
 
-            addNumberToArray: function(gameRule, selectedNumber) {
+            addNumberToArray: function(gameRule, selectedNumber, gameType, gamePrice) {
+                
                 if(this.currentGame.length < gameRule){
 
                     if(this.currentGame.indexOf(selectedNumber) === -1){
 
                         this.currentGame.push(selectedNumber);
-                        console.log(this.currentGame);
-
                     }
-                }
+
+                    if(this.currentGame.length == (gameRule))
+
+                        this.currentGame.push([gameType, gamePrice]);
+                        console.log(this.currentGame)
+                };
+                                
             },
 
             cleaGame: function() {
                 $('[data-js="clear"]').on('click', () => {
                     this.currentGame = [];
-                    console.log(this.currentGame);
                 })
             },
 
@@ -112,6 +133,7 @@
                 $('[data-js="addToCart"]').on( 'click', () => {
                     this.cart.push([this.currentGame]);
                     this.currentGame = [];
+                    console.log(this.cart);
                     this.cartDisplay();
                 })
             },
@@ -122,22 +144,19 @@
 
                if(Cart.hasChildNodes() === true)
                     Cart.innerHTML = '';
-
+                let Price = []
                 this.cart.forEach( game => {
-
+                   let price = game[0][game[0].length-1][1];
                     let div = document.createElement('div');
+                    Price.push(price)
 
                     let $button = document.createElement('button');
                     $button.setAttribute("data-js", 'deleteGame');
                     $button.appendChild(document.createTextNode('Delete'));
                     
-                    
                     div.setAttribute("data-js", "game");
                         div.id = this.cart.indexOf(game);
-                        div.appendChild(document.createTextNode(`${game}`));
-
-/*                     let priceAndType = this.getNameAndPrice(game[0]);
-                    console.log(priceAndType.$price) */
+                        div.appendChild(document.createTextNode(`${game[0]}`));
                     
                     $button.value = div.id;
                     $button.addEventListener('click', () => {
@@ -147,37 +166,13 @@
                     div.appendChild($button);
                     Cart.appendChild(div);
                 })
-
+                this.getPrice(Price);
             },
 
-            getNameAndPrice: function(game) {
+            getPrice: function(price) {
 
-                console.log(game.length)
-                let $type = document.createElement('span');
-                let $price = document.createElement('span');
-                let type
-                let price
-
-                if(game.length == 5) {
-                    type = 'quina';
-                    price = '2'
-                }
-
-                if(game.length == 15) {
-                    type = 'LotoFácil';
-                    price = '55'
-                }
-
-                if(game.length == 6) {
-                    type = 'Mega-sena';
-                    price = '2'
-                }
-
-                $type.appendChild(document.createTextNode(`${type}`));
-                $price.appendChild(document.createTextNode(`${price}`));
-
-                return { $type, $price }
-
+                const total = price.reduce((total, currentElement) => total + currentElement);
+                $('[data-js="price"]').get().textContent = total
             },
 
             HandleDelete: function(id) {
@@ -187,18 +182,6 @@
                 console.log(this.cart);
             },
 
-            completeGame: function(range, maxNumber) {
-                $('[data-js="completeGame"]').on('click', () => {
-                    this.generateCompleteGame(range, maxNumber)
-                });
-            },
-
-            generateCompleteGame: function(range, maxNumber) {
-                for(let i = 0; i <= maxNumber; i++) {
-                    let selected = Math.floor(Math.random() * range);
-                    this.addNumberToArray(maxNumber, selected)
-                }
-            }
         }
 
     }());
