@@ -9,6 +9,7 @@
                 this.ajaxRequest();
                 this.cleaGame();
                 this.addCart();
+                this.completeGame();
             },
 
             ajaxRequest: function() {
@@ -50,47 +51,48 @@
 
             handleSelectGame: function(rules) {
 
+                this.rules = rules;
+                //this.completeGame(rules.range, rules.maxNumber, rules.type, rules.price);
+                this.generatebuttons(rules);
+                this.generateGame(rules.maxNumber, rules.type, rules.price);
+
                 $('[data-js="game"]').get().textContent = rules.type;
                 $('[data-js="gameRules"]').get().textContent = rules.description;
 
-                this.completeGame(rules.range, rules.maxNumber, rules.type, rules.price);
-                this.generatebuttons(rules.range, rules.maxNumber, rules.type, rules.price);
-                this.generateGame(rules.maxNumber, rules.type, rules.price);
-
             },
 
-            completeGame: function(range, maxNumber, type, price) {
+            rules: {},
+
+            completeGame: function() {
                 $('[data-js="completeGame"]').on('click', () => {
-                    this.generateCompleteGame(range, maxNumber, type, price)
-                });
-                console.log(type, price)
+                    let game = this.rules
+                    this.generateCompleteGame(game.range, game.maxNumber, game.type, game.price);
+                }); 
                 
             }, 
 
             generateCompleteGame: function(range, maxNumber, gameType, gamePrice) {
-
-                console.log(gameType)
-                for(let i = 0; i <= maxNumber; i++) {
+                while(this.currentGame.length <= maxNumber) {
                     let selected = Math.floor(Math.random() * range);
-
                     this.addNumberToArray(maxNumber, selected, gameType, gamePrice);
-                }
+                    console.log(this.currentGame.length) 
+                } 
             }, 
 
-            generatebuttons: function(GameRange) {
+            generatebuttons: function(rules) {
 
                 let div = $('[data-js="numbers"]').get();
 
                 if(div.hasChildNodes() === true)
                     div.innerHTML = ''
 
-                for(let i = 1; i <= GameRange; i++) {
+                for(let i = 1; i <= rules.range; i++) {
                     const $button = document.createElement('button');
                     $button.value = i;
                     $button.setAttribute("data-js", 'number-choice')
                     $button.appendChild(document.createTextNode(`${i}`));
                     div.appendChild($button);
-                }
+                }    
 
             },
 
