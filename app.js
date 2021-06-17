@@ -10,6 +10,7 @@
                 this.cleaGame();
                 this.addCart();
                 this.completeGame();
+                this.getPrice([]);
             },
 
         //AJAX request
@@ -24,6 +25,9 @@
                 return this.readyState === 4 && this.status === 200
             },
 
+            //Storing selected rules to be used donw in the complete game generator func
+                rules: {},
+
             getGameRules: function() {
                 if(!app.isReady.call(this))
                     return;
@@ -31,6 +35,16 @@
                 let data = JSON.parse(this.responseText);
                 
                 app.selectGame(data);
+                this.rules = data.types[0];
+                app.handleFirstGame(this.rules);
+
+            },
+            
+            handleFirstGame: function(rules) {
+
+                app.generatebuttons(rules);
+                app.generateRulesAndTitle(rules.type, rules.description);
+                this.generateGame(rules.maxNumber, rules.type, rules.price);              
 
             },
 
@@ -53,15 +67,19 @@
 
             //Passing the rules donw to other functions
             handleSelectGame: function(rules) {
-
+                this.currentGame = [];
+                console.log(this.currentGame)
                 this.rules = rules;
                 //this.completeGame(rules.range, rules.maxNumber, rules.type, rules.price);
                 this.generatebuttons(rules);
                 this.generateGame(rules.maxNumber, rules.type, rules.price);
+                app.generateRulesAndTitle(rules.type, rules.description);
 
-                $('[data-js="game"]').get().textContent = rules.type;
-                $('[data-js="gameRules"]').get().textContent = rules.description;
+            },
 
+            generateRulesAndTitle: function(type, description) {
+                $('[data-js="game"]').get().textContent = type;
+                $('[data-js="gameRules"]').get().textContent = description;
             },
 
             //Generate the buttons according to the game rule range propierty
@@ -81,9 +99,6 @@
                 }    
 
             },
-
-            //Storing selected rules to be used donw in the complete game generator func
-            rules: {},
 
             completeGame: function() {
                 $('[data-js="completeGame"]').on('click', () => {
@@ -122,11 +137,14 @@
                     if(this.currentGame.indexOf(selectedNumber) === -1 && selectedNumber !== 0){
 
                         this.currentGame.push(selectedNumber);
+                        console.log(this.currentGame)
                     }
 
-                    if(this.currentGame.length == (gameRule))
+                    if(this.currentGame.length == (gameRule)) {
 
                         this.currentGame.push([gameType, gamePrice]);
+                        alert('Todos os números já foram selecionados, adicione ao carrinho! ou limpe o jogo')
+                    }
                 };
                                 
             },
@@ -144,10 +162,20 @@
             //Add games to cart
             addCart: function() {
                 $('[data-js="addToCart"]').on( 'click', () => {
-                    this.cart.push([this.currentGame]);
-                    this.currentGame = [];
+                    this.checkCurrentGameQuantity(app.rules)
                     this.cartDisplay();
                 })
+            },
+
+            checkCurrentGameQuantity: function(rules) {
+                if(this.currentGame.length < rules.maxNumber) {
+                    alert(`Selecione mais 
+                        ${((rules.maxNumber) - (this.currentGame.length))} números para prosseguir`)
+                }
+                    else {
+                        this.cart.push([this.currentGame]);
+                        this.currentGame = [];
+                    }
             },
 
             //Generate elements that will be displayed at the cart
@@ -236,11 +264,10 @@
 
             //Sums the price to be displayed
             getPrice: function(price) {
+                console.log(typeof price)
                 if(price.length === 0) {
                     let total = 0;
-                    $('[data-js="price"]').get().textContent = `TOTAL ${
-                        total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
-                    }`
+                    $('[data-js="price"]').get().textContent = `Seu carrinho está vazio :(`
                 } else {
                 const total = price.reduce((total, currentElement) => +total + +currentElement);
                 let formated = total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
