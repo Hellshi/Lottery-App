@@ -73,6 +73,22 @@ body {
     width: 680px;
 }
 
+[data-js="GameContainer"] {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    border-left: 4px solid red;
+    border-radius: 3px;
+    padding: 10px;
+    color: #868686;
+    font-weight: bold;
+}
+
+[data-js="GameFinished"] {
+    display: flex;
+
+}
+
 
 /* -------------------------- End-of-Containers ------------------------------ */
 
@@ -110,6 +126,38 @@ h2 {
     font-weight: lighter;
 }
 
+[data-js="gameNumbersComplete"] {
+    width: 200px;
+}
+
+.Mega-Sena{
+    border-color: #01AC66;
+}
+
+.Quina{
+    border-color: #F79C31;
+}
+
+.Lotofácil {
+    border-color: #7F3992;
+}
+
+span.Lotofácil {
+    color: #7F3992;
+}
+
+span.Mega-Sena{
+    color: #01AC66;
+}
+
+span.Quina{
+    color: #F79C31;
+}
+
+[data-js="priceCart"] {
+    margin-left: 10px;
+}
+
 /* -------------------------- end-of-texts ------------------------------ */
 
 
@@ -142,6 +190,15 @@ h2 {
 [data-js="quina"] {
     color: #F79C31;
     border-color: #F79C31;
+}
+
+[data-js="deleteGame"]:hover {
+    cursor: pointer;
+}
+
+i.fa-trash-o {
+    font-size: 20px;
+    margin-right: 10px;
 }
 
 
