@@ -243,17 +243,17 @@ button.selected#Quina {
     background-color: #F79C31;  
 }
 
-[data-js="lotofacil"] {
+[data-js="Lotofácil"] {
     color: #7F3992;
     border-color: #7F3992;
 }
 
-[data-js="megasena"] {
+[data-js="Mega-Sena"] {
     color: #01AC66;
     border-color: #01AC66;
 }
 
-[data-js="quina"] {
+[data-js="Quina"] {
     color: #F79C31;
     border-color: #F79C31;
 }
@@ -333,19 +333,19 @@ i.fa-trash-o {
 }
 
 
-[data-js="lotofacil"]:hover {
+[data-js="Lotofácil"]:hover {
     color: white;
     background-color: #7F3992;
     cursor: pointer;
 }
 
-[data-js="megasena"]:hover {
+[data-js="Mega-Sena"]:hover {
     color: white;
     background-color: #01AC66;
     cursor: pointer;
 }
 
-[data-js="quina"]:hover {
+[data-js="Quina"]:hover {
     color: white;
     background-color: #F79C31;
     cursor: pointer;

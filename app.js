@@ -34,10 +34,28 @@
 
                 let data = JSON.parse(this.responseText);
                 
+                app.generateSelectors(data);
                 app.selectGame(data);
                 this.rules = data.types[0];
                 app.handleFirstGame(this.rules);
 
+            },
+
+            generateSelectors: function(data) {
+                let $div = $('[data-js="buttonsSelectorDiv"]').get();
+                let types = data.types;
+                types.forEach(game => {
+                    let $Button = document.createElement('button');
+                    $Button.setAttribute("data-js", `${game.type}`);
+                    $Button.appendChild(document.createTextNode(`${game.type}`));
+                    $Button.classList.add('chooseGame');
+                    $Button.value = types.indexOf(game);
+                    $Button.addEventListener('click', () => {
+                        this.handleSelectGame(types[$Button.value])
+                    })
+                    $div.appendChild($Button);
+                    
+                })
             },
             
             handleFirstGame: function(rules) {
@@ -207,11 +225,15 @@
                     
                     div.setAttribute("data-js", "GameFinished");
                         div.id = this.cart.indexOf(game);
-                        this.getOnlyNumbers(game[0], div);                        
+                        console.log(this.cart.indexOf(game))
+                        this.getOnlyNumbers(game[0]);                        
                     
-                    $button.value = div.id;
+                    $button.id = div.id;
+                    console.log(div.id)
+                    console.log($button.id)
+                    console.log(typeof $button.id)
                     $button.addEventListener('click', () => {
-                        this.HandleDelete($button.value, Price)
+                        this.HandleDelete($button.id, Price)
                     });
 
                     div.appendChild($button);
