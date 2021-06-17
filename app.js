@@ -12,6 +12,7 @@
                 this.completeGame();
             },
 
+        //AJAX request
             ajaxRequest: function() {
                 const AJAX = new XMLHttpRequest();
                 AJAX.open('GET', './games.json');
@@ -33,6 +34,7 @@
 
             },
 
+            //Select function call buttons 
             selectGame: function(data) {
 
                 $('[data-js="lotofacil"]').on('click', () => {
@@ -49,6 +51,7 @@
 
             },
 
+            //Passing the rules donw to other functions
             handleSelectGame: function(rules) {
 
                 this.rules = rules;
@@ -61,23 +64,7 @@
 
             },
 
-            rules: {},
-
-            completeGame: function() {
-                $('[data-js="completeGame"]').on('click', () => {
-                    let game = this.rules
-                    this.generateCompleteGame(game.range, game.maxNumber, game.type, game.price);
-                }); 
-                
-            }, 
-
-            generateCompleteGame: function(range, maxNumber, gameType, gamePrice) {
-                while(this.currentGame.length <= maxNumber) {
-                    let selected = Math.floor(Math.random() * range);
-                    this.addNumberToArray(maxNumber, selected, gameType, gamePrice);
-                } 
-            }, 
-
+            //Generate the buttons according to the game rule range propierty
             generatebuttons: function(rules) {
 
                 let div = $('[data-js="numbers"]').get();
@@ -95,8 +82,30 @@
 
             },
 
+            //Storing selected rules to be used donw in the complete game generator func
+            rules: {},
+
+            completeGame: function() {
+                $('[data-js="completeGame"]').on('click', () => {
+                    let game = this.rules
+                    this.generateCompleteGame(game.range, game.maxNumber, game.type, game.price);
+                }); 
+                
+            }, 
+
+            generateCompleteGame: function(range, maxNumber, gameType, gamePrice) {
+                while(this.currentGame.length <= maxNumber) {
+                    let selected = Math.floor(Math.random() * range);
+                    this.addNumberToArray(maxNumber, selected, gameType, gamePrice);
+                } 
+            }, 
+
+            //Store the current selected numbers
+            //The object recieved here is a multi-dimensional array
+            //This array is like [1, 2, 3..., [GameType, GamePrice]]
             currentGame: [],
 
+            //Generate using user's selected numbers at the interface
             generateGame: function(gameRule, gameType, gamePrice) {
                 $('[data-js="number-choice"]').forEach(button => {
                     button.addEventListener('click', () => {
@@ -105,6 +114,7 @@
                 })
             },
 
+            //Add numbers to the currentGame array
             addNumberToArray: function(gameRule, selectedNumber, gameType, gamePrice) {
                 
                 if(this.currentGame.length < gameRule){
@@ -121,14 +131,17 @@
                                 
             },
 
+            //Clear the CurrentGame array
             cleaGame: function() {
                 $('[data-js="clear"]').on('click', () => {
                     this.currentGame = [];
                 })
             },
 
+            //Store all games in the cart
             cart: [],
             
+            //Add games to cart
             addCart: function() {
                 $('[data-js="addToCart"]').on( 'click', () => {
                     this.cart.push([this.currentGame]);
@@ -137,6 +150,7 @@
                 })
             },
 
+            //Generate elements that will be displayed at the cart
             cartDisplay: function() {
 
                 let Cart = $('[data-js="cart"]').get();
@@ -170,6 +184,8 @@
                 this.getPrice(Price);
             },
 
+            //Separate the numbers from the array containing the GameType and GamePrice
+            //This function will return an div element the will be appended in the upper function 
             getOnlyNumbers: function(game) {
 
                 let gameContainer = document.createElement('div');
@@ -217,6 +233,8 @@
                 return gameContainer
             },
 
+
+            //Sums the price to be displayed
             getPrice: function(price) {
                 if(price.length === 0) {
                     let total = 0;
@@ -230,6 +248,7 @@
             }
             },
 
+            //Deletes an item from the cart
             HandleDelete: function(id, price) {
                 let child = document.getElementById(id);
                 document.querySelector('[data-js="cart"]').removeChild(child);
