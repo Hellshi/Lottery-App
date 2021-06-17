@@ -231,6 +231,10 @@ span.Quina{
     margin-bottom: 20px;
 }
 
+button.selected {
+    background-color: #01AC66;
+}
+
 [data-js="lotofacil"] {
     color: #7F3992;
     border-color: #7F3992;

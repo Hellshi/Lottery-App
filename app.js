@@ -124,20 +124,21 @@
             generateGame: function(gameRule, gameType, gamePrice) {
                 $('[data-js="number-choice"]').forEach(button => {
                     button.addEventListener('click', () => {
-                        this.addNumberToArray(gameRule, button.value, gameType, gamePrice);
+                        this.addNumberToArray(gameRule, button, gameType, gamePrice);
                     })
                 })
             },
 
             //Add numbers to the currentGame array
-            addNumberToArray: function(gameRule, selectedNumber, gameType, gamePrice) {
+            addNumberToArray: function(gameRule, button, gameType, gamePrice) {
                 
                 if(this.currentGame.length < gameRule){
 
-                    if(this.currentGame.indexOf(selectedNumber) === -1 && selectedNumber !== 0){
+                    if(this.currentGame.indexOf(button.value)=== -1 && button.value !== 0){
 
-                        this.currentGame.push(selectedNumber);
-                        console.log(this.currentGame)
+                        button.classList.add('selected');
+                        this.currentGame.push(button.value);
+
                     }
 
                     if(this.currentGame.length == (gameRule)) {
@@ -169,8 +170,8 @@
 
             checkCurrentGameQuantity: function(rules) {
                 if(this.currentGame.length < rules.maxNumber) {
-                    alert(`Selecione mais 
-                        ${((rules.maxNumber) - (this.currentGame.length))} números para prosseguir`)
+                    alert(`Selecione mais ${((rules.maxNumber) - (this.currentGame.length))} 
+                        números para prosseguir`)
                 }
                     else {
                         this.cart.push([this.currentGame]);
