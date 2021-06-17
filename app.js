@@ -35,7 +35,6 @@
                 let data = JSON.parse(this.responseText);
                 
                 app.generateSelectors(data);
-                app.selectGame(data);
                 this.rules = data.types[0];
                 app.handleFirstGame(this.rules);
 
@@ -66,29 +65,12 @@
 
             },
 
-            //Select function call buttons 
-            selectGame: function(data) {
-
-                $('[data-js="lotofacil"]').on('click', () => {
-                    this.handleSelectGame(data.types[0]);
-                });
-
-                $('[data-js="megasena"]').on('click',  () => {
-                    this.handleSelectGame(data.types[1]);
-                });
-
-                $('[data-js="quina"]').on('click',  () => {
-                    this.handleSelectGame(data.types[2]);
-                });
-
-            },
-
             //Passing the rules donw to other functions
             handleSelectGame: function(rules) {
                 this.currentGame = [];
-                console.log(this.currentGame)
+                
                 this.rules = rules;
-                //this.completeGame(rules.range, rules.maxNumber, rules.type, rules.price);
+
                 this.generatebuttons(rules);
                 this.generateGame(rules.maxNumber, rules.type, rules.price);
                 app.generateRulesAndTitle(rules.type, rules.description);
@@ -122,13 +104,14 @@
             completeGame: function() {
                 $('[data-js="completeGame"]').on('click', () => {
                     let game = this.rules
+
                     this.generateCompleteGame(game.range, game.maxNumber, game.type, game.price);
                 }); 
                 
             }, 
 
             generateCompleteGame: function(range, maxNumber, gameType, gamePrice) {
-                while(this.currentGame.length <= maxNumber) {
+                while(this.currentGame.length < maxNumber) {
                     let selected = Math.floor(Math.random() * range);
                     this.addNumberToArray(maxNumber, selected, gameType, gamePrice);
                 } 
@@ -143,21 +126,20 @@
             generateGame: function(gameRule, gameType, gamePrice) {
                 $('[data-js="number-choice"]').forEach(button => {
                     button.addEventListener('click', () => {
-                        this.addNumberToArray(gameRule, button, gameType, gamePrice);
+                        this.addNumberToArray(gameRule, button.value, gameType, gamePrice);
+                        button.classList.add('selected');
                     })
                 })
             },
 
             //Add numbers to the currentGame array
-            addNumberToArray: function(gameRule, button, gameType, gamePrice) {
-                
+            addNumberToArray: function(gameRule, number, gameType, gamePrice) {
+
                 if(this.currentGame.length < gameRule){
 
-                    if(this.currentGame.indexOf(button.value)=== -1 && button.value !== 0){
+                    if(this.currentGame.indexOf(number)=== -1 && number !== 0){
 
-                        button.classList.add('selected');
-                        this.currentGame.push(button.value);
-
+                        this.currentGame.push(number);
                     }
 
                     if(this.currentGame.length == (gameRule)) {
@@ -214,7 +196,6 @@
                     Cart.innerHTML = '';
                 let Price = []
                 this.cart.forEach( game => {
-
                    let price = game[0][game[0].length-1][1];
                     let div = document.createElement('div');
                     Price.push(price)
@@ -225,13 +206,9 @@
                     
                     div.setAttribute("data-js", "GameFinished");
                         div.id = this.cart.indexOf(game);
-                        console.log(this.cart.indexOf(game))
                         this.getOnlyNumbers(game[0]);                        
                     
                     $button.id = div.id;
-                    console.log(div.id)
-                    console.log($button.id)
-                    console.log(typeof $button.id)
                     $button.addEventListener('click', () => {
                         this.HandleDelete($button.id, Price)
                     });
@@ -295,7 +272,6 @@
 
             //Sums the price to be displayed
             getPrice: function(price) {
-                console.log(typeof price)
                 if(price.length === 0) {
                     let total = 0;
                     $('[data-js="price"]').get().textContent = `Seu carrinho está vazio :(`
