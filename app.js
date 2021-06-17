@@ -50,7 +50,7 @@
                     $Button.classList.add('chooseGame');
                     $Button.value = types.indexOf(game);
                     $Button.addEventListener('click', () => {
-                        this.handleSelectGame(types[$Button.value])
+                        this.handleSelectGame(types[$Button.value], $Button)
                     })
                     $div.appendChild($Button);
                     
@@ -58,7 +58,6 @@
             },
             
             handleFirstGame: function(rules) {
-
                 app.generatebuttons(rules);
                 app.generateRulesAndTitle(rules.type, rules.description);
                 this.generateGame(rules.maxNumber, rules.type, rules.price);              
@@ -66,15 +65,27 @@
             },
 
             //Passing the rules donw to other functions
-            handleSelectGame: function(rules) {
+            handleSelectGame: function(rules, button) {
                 this.currentGame = [];
-                
+
                 this.rules = rules;
 
+                app.cleanChoosenGame()
                 this.generatebuttons(rules);
                 this.generateGame(rules.maxNumber, rules.type, rules.price);
                 app.generateRulesAndTitle(rules.type, rules.description);
+                app.selectedGame(button);
 
+            },
+
+            cleanChoosenGame: function() {
+                $('.chooseGame').forEach(item => {
+                    item.id = ''
+                })
+            },
+
+            selectedGame: function(button) {
+                button.id = 'selected'
             },
 
             generateRulesAndTitle: function(type, description) {

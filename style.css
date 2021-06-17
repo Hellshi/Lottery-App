@@ -243,6 +243,21 @@ button.selected#Quina {
     background-color: #F79C31;  
 }
 
+[data-js="Quina"]#selected {
+    background-color: #F79C31;
+    color: white;
+}
+
+[data-js="Lotofácil"]#selected {
+    background-color: #7F3992;
+    color: white;
+}
+
+[data-js="Mega-Sena"]#selected {
+    background-color: #01AC66;
+    color: white;
+}
+
 [data-js="Lotofácil"] {
     color: #7F3992;
     border-color: #7F3992;
