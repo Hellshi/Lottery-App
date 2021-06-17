@@ -93,7 +93,8 @@
                 for(let i = 1; i <= rules.range; i++) {
                     const $button = document.createElement('button');
                     $button.value = i;
-                    $button.setAttribute("data-js", 'number-choice')
+                    $button.setAttribute("data-js", 'number-choice');
+                    $button.id = `${rules.type}`;
                     $button.appendChild(document.createTextNode(`${i}`));
                     div.appendChild($button);
                 }    
