@@ -9,6 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+    <header>
+        <div>
+            <div>
+                <a href="#" id="logo">TGL</a>
+                <a href="#" id="home">Home</a>
+            </div>
+    
+            <div>
+                <a href="#">Account</a>
+                <a href="#">Log out <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </header>
 
     <div class="container">
 
@@ -83,13 +96,21 @@
         </div>
 
         <div class="rightContainer">
-                    <h2>CART</h2>
-                    <div data-js="cart"></div>
-                    <h2>CART <span data-js="price"></span></h2>
+                    <div class="cartAndTotal">
+                        <h2>CART</h2>
+                        <div class="allGames">
+                            <div data-js="cart"></div>
+                        </div>
+                        <h2>CART <span data-js="price"></span></h2>
+                    </div>
+                    <button class="save">Save <i class="fa fa-arrow-right"></i> </button>
         </div>
+
+
 
     </div>
 
+    <footer>Copyright 2021 Luby Software</footer>
 </body>
 <script src="./DOM.js"></script>
 <script src="./app.js"></script>

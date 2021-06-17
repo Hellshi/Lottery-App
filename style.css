@@ -10,6 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background-color: #F7F7F7;
     color: #707070;
 }
@@ -17,14 +18,48 @@ body {
 
 /* -------------------------- Containers ------------------------------ */
 
+footer {
+    width: 100%;
+    border-top: 1px solid #EBEBEB;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+}
 
-.container {
-    margin-top: 30px;
-    height: 550px;
-    width: 1100px;
+header {
     display: flex;
     justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid #EBEBEB;
+}
+
+header > div {
+    width: 1100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+header > div > div {
+    display: flex;
     align-items: center;
+}
+
+a {
+    font-style: italic;
+    text-decoration: none;
+    color: #707070;
+    margin-left: 20px;
+    font-weight: bolder;
+}
+
+.container {
+    margin-top: 20px;
+    width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
 }
 
 /* container com o jogo */
@@ -34,7 +69,6 @@ body {
     max-width: 770px;
     position: relative;
     top: 15px;
-    left: -50px;
 }
 /* container com o carrinho */
 .rightContainer {
@@ -44,12 +78,12 @@ body {
     display: flex;
     max-width: 280px;
     flex-direction: column;
+    justify-content: space-between;
     position: relative;
     top: -60px;
     width: 280px;
-    height: 344px;
+    min-height: 344px;
     background-color: white;
-    padding: 20px;
 }
 
 /* container com todos os números */
@@ -59,7 +93,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 100%;
     padding-bottom: 10px;
     max-height: 220px;
     min-height: 220px;
@@ -84,9 +117,18 @@ body {
     font-weight: bold;
 }
 
+.cartAndTotal {
+    padding: 20px;
+}
+
 [data-js="GameFinished"] {
     display: flex;
+    align-items: center;
 
+}
+
+.allGames {
+    margin-bottom: 10px;
 }
 
 
@@ -127,7 +169,7 @@ h2 {
 }
 
 [data-js="gameNumbersComplete"] {
-    width: 200px;
+    width: 120px;
 }
 
 .Mega-Sena{
@@ -162,6 +204,13 @@ span.Quina{
     font-weight: lighter;
 }
 
+#logo {
+    font-size: 40px;
+    border-bottom: 5px solid #B5C401;
+    border-radius: 5px;
+    padding-top: 10px;
+}
+
 /* -------------------------- end-of-texts ------------------------------ */
 
 
@@ -178,6 +227,7 @@ span.Quina{
     font-size: 15px;
     font-weight: bold;
     outline: none;
+    min-width: 130px;
     margin-bottom: 20px;
 }
 
@@ -203,7 +253,6 @@ span.Quina{
 i.fa-trash-o {
     font-size: 25px;
     margin-right: 10px;
-    padding-top: 15px;
 }
 
 
@@ -236,6 +285,18 @@ i.fa-trash-o {
     border-radius: 30px;
     color: white;
     background-color: #ADC0C4;
+}
+
+.save {
+    background: #F4F4F4;
+    color: #27C383;
+    border: none;
+    width: 100%;
+    padding: 15px;
+    font-weight: bolder;
+    font-size: 25px;
+    font-style: italic;
+    border-radius: 0px 0px 20px 20px;
 }
 
 /* -------------------------- end-of-buttons ------------------------------ */

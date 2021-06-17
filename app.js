@@ -77,7 +77,6 @@
                 while(this.currentGame.length <= maxNumber) {
                     let selected = Math.floor(Math.random() * range);
                     this.addNumberToArray(maxNumber, selected, gameType, gamePrice);
-                    console.log(this.currentGame);
                 } 
             }, 
 
@@ -120,7 +119,6 @@
                     if(this.currentGame.length == (gameRule))
 
                         this.currentGame.push([gameType, gamePrice]);
-                        console.log(this.currentGame)
                 };
                                 
             },
@@ -136,9 +134,7 @@
             addCart: function() {
                 $('[data-js="addToCart"]').on( 'click', () => {
                     this.cart.push([this.currentGame]);
-                    console.log(typeof this.cart[0])
                     this.currentGame = [];
-                    console.log(this.cart);
                     this.cartDisplay();
                 })
             },
@@ -224,7 +220,6 @@
             },
 
             getPrice: function(price) {
-                console.log(price.length)
                 if(price.length === 0) {
                     let total = 0;
                     $('[data-js="price"]').get().textContent = `TOTAL ${
@@ -243,7 +238,6 @@
                 this.cart.splice(id, 1);
                 price.splice(id, 1);
                 this.getPrice(price);
-                console.log(this.cart);
             },
 
         }
