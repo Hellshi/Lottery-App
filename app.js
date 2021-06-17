@@ -154,7 +154,14 @@
             cleaGame: function() {
                 $('[data-js="clear"]').on('click', () => {
                     this.currentGame = [];
+                    app.clearClasses();
                 })
+            },
+
+            clearClasses: function() {
+                $('[data-js="number-choice"]').forEach(button => {
+                    button.classList.remove('selected');
+                }) 
             },
 
             //Store all games in the cart
@@ -165,13 +172,13 @@
                 $('[data-js="addToCart"]').on( 'click', () => {
                     this.checkCurrentGameQuantity(app.rules)
                     this.cartDisplay();
+                    this.clearClasses();
                 })
             },
 
             checkCurrentGameQuantity: function(rules) {
                 if(this.currentGame.length < rules.maxNumber) {
-                    alert(`Selecione mais ${((rules.maxNumber) - (this.currentGame.length))} 
-                        números para prosseguir`)
+                    alert(`Selecione mais ${((rules.maxNumber) - (this.currentGame.length))} números para prosseguir`);
                 }
                     else {
                         this.cart.push([this.currentGame]);
