@@ -12,7 +12,6 @@
                 this.completeGame();
             },
 
-/* ------------ AJAX REQUEST -------------- */
             ajaxRequest: function() {
                 const AJAX = new XMLHttpRequest();
                 AJAX.open('GET', './games.json');
@@ -34,7 +33,6 @@
 
             },
 
-/* ------------  Click to select game -------------- */
             selectGame: function(data) {
 
                 $('[data-js="lotofacil"]').on('click', () => {
