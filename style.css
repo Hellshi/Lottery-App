@@ -158,6 +158,10 @@ span.Quina{
     margin-left: 10px;
 }
 
+[data-js="priceCart"], [data-js="price"] {
+    font-weight: lighter;
+}
+
 /* -------------------------- end-of-texts ------------------------------ */
 
 
@@ -197,8 +201,9 @@ span.Quina{
 }
 
 i.fa-trash-o {
-    font-size: 20px;
+    font-size: 25px;
     margin-right: 10px;
+    padding-top: 15px;
 }
 
 

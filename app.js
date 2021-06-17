@@ -208,7 +208,9 @@
                         gameContainer.className = `${item[0]}`
                         type.appendChild(document.createTextNode(`${item[0]}`));
                         type.className = `${item[0]}`
-                        price.appendChild(document.createTextNode(`${item[1]}`));
+                        price.appendChild(document.createTextNode(
+                            item[1].toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+                            ));
                         priceAndType.appendChild(type);
                         priceAndType.appendChild(price);
                     }
@@ -225,10 +227,13 @@
                 console.log(price.length)
                 if(price.length === 0) {
                     let total = 0;
-                    $('[data-js="price"]').get().textContent = `TOTAL ${total}`
+                    $('[data-js="price"]').get().textContent = `TOTAL ${
+                        total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+                    }`
                 } else {
                 const total = price.reduce((total, currentElement) => +total + +currentElement);
-                $('[data-js="price"]').get().textContent = `TOTAL ${total}`
+                let formated = total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+                $('[data-js="price"]').get().textContent = `TOTAL ${formated}`
             }
             },
 
